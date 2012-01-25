@@ -45,6 +45,7 @@
     <Compile Include="System/FunctionalExtensions/EitherExtensions.cs" />
     <Compile Include="System/FunctionalExtensions/FuncExtensions.cs" />
     <Compile Include="System/FunctionalExtensions/ListExtensions.cs" />
+    <Compile Include="System/FunctionalExtensions/Monoid.cs" />
     <Compile Include="System/FunctionalExtensions/Option.cs" />
     <Compile Include="System/FunctionalExtensions/OptionExtensions.cs" />
     <Compile Include="System/FunctionalExtensions/RangeExtension.cs" />

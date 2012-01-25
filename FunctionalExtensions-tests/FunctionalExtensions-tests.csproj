@@ -48,6 +48,7 @@
     <Compile Include="TestEitherExtensions.cs" />
     <Compile Include="TestFuncExtensions.cs" />
     <Compile Include="TestListExtensions.cs" />
+    <Compile Include="TestMonoid.cs" />
     <Compile Include="TestOption.cs" />
     <Compile Include="TestOptionExtensions.cs" />
     <Compile Include="TestRangeExtension.cs" />
