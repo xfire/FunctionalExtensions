@@ -44,6 +44,11 @@ namespace System.FunctionalExtensions
         private readonly T _value;
 
         /// <summary>
+        /// None for the type {T}.
+        /// </summary>
+        public static readonly Option<T> None = new Option<T>();
+
+        /// <summary>
         /// Don't use!
         /// </summary>
         public Option(T value)

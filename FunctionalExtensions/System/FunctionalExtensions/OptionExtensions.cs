@@ -18,7 +18,7 @@ namespace System.FunctionalExtensions
         /// </summary>
         public static Option<TValue> None<TValue>()
         {
-            return new Option<TValue>();
+            return Option<TValue>.None;
         }
 
         /// <summary>
