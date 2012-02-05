@@ -53,12 +53,12 @@ class Process(ProcessEvent):
             subprocess.call(args, shell=True)
             sys.stdout.write("------------------------\n")
 
+wm = WatchManager()
+process = Process(options)
+notifier = Notifier(wm, process)
+mask = IN_DELETE | IN_CREATE | IN_CLOSE_WRITE
+wdd = wm.add_watch(options.directory, mask, rec=True)
 while True:
-    wm = WatchManager()
-    process = Process(options)
-    notifier = Notifier(wm, process)
-    mask = IN_DELETE | IN_CREATE | IN_CLOSE_WRITE
-    wdd = wm.add_watch(options.directory, mask, rec=True)
     try:
         while True:
             notifier.process_events()
@@ -67,5 +67,6 @@ while True:
     except Reload:
         pass
     except KeyboardInterrupt:
-        notifier.stop()
         break
+wm.rm_watch(wdd.values())
+notifier.stop()
