@@ -60,6 +60,13 @@ namespace System.FunctionalExtensions.Tests
         }
 
         [Test]
+        public void A3AryFunctionCanBeFullyCurried()
+        {
+            Func<int, Func<int, Func<int, int>>> curried = AddMulSub.CurryFull();
+            Assert.That(curried(2)(4)(6), Is.EqualTo(AddMulSub(2, 4, 6)));
+        }
+
+        [Test]
         public void TwoSimpleFunctionsCanBeComposed()
         {
             var f = Add2.Compose(Mul10);
