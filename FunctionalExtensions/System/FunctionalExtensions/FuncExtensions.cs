@@ -79,6 +79,7 @@ namespace System.FunctionalExtensions
         /// <summary>
         /// Compose two 1-ary functions, e.g. return a new function which call <paramref name="f"/> with the
         /// result of <paramref name="g"/> applied to the parameter.
+        /// e.g. a(b(c(x))) == a.Compose(b).Compose(c)(x)
         /// </summary>
         public static Func<TA, TC> Compose<TA, TB, TC>(this Func<TB, TC> f, Func<TA, TB> g)
         {

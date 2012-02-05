@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace System.FunctionalExtensions.Tests
 {
@@ -58,12 +60,36 @@ namespace System.FunctionalExtensions.Tests
         }
 
         [Test]
-        public void TwoFunctionsCanBeComposed()
+        public void TwoSimpleFunctionsCanBeComposed()
         {
             var f = Add2.Compose(Mul10);
             var f2 = Mul10.Compose(Add2);
             Assert.That(f(5), Is.EqualTo(52));
             Assert.That(f2(5), Is.EqualTo(70));
+        }
+
+        [Test]
+        public void ComposeTwoFunctionOnEnumerationOfIntegers()
+        {
+            Func<IEnumerable<int>, IEnumerable<int>> sort = xs => xs.OrderBy(x=>x);
+            Func<IEnumerable<int>, IEnumerable<int>> reverse = xs => xs.Reverse();
+
+            var testData = new List<int>() { 4, 1, 5, 3, 2 };
+            var descSort = reverse.Compose(sort);
+
+            Assert.That(descSort(testData), Is.EquivalentTo(5.To(1)));
+            Assert.That(descSort(testData), Is.EquivalentTo(reverse(sort(testData))));
+        }
+
+        [Test]
+        public void ComposeFunctionsWithVariousComplexerTypes()
+        {
+            Func<int, Option<string>> f = i => i.ToString().ToOption();
+            Func<Option<string>, Either<int, int>> g = os => os.Value.Length.Right<int, int>();
+
+            var c = g.Compose(f);
+
+            Assert.That(c(12345).Right, Is.EqualTo(5));
         }
 
         [Test]
